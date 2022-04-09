@@ -1,0 +1,10 @@
+/node_modules
+
+# Builded from ts to js files
+/build
+
+# Database from docker-compose files
+/pgdata
+
+# Configuration file
+.env

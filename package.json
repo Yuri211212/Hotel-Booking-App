@@ -1,0 +1,40 @@
+{
+  "name": "hotelbookingapp",
+  "version": "1.0.0",
+  "description": "API server for hotels booking app",
+  "main": "app.js",
+  "scripts": {
+    "start": "npm run build && node build/bootstrap.js",
+    "db:dev": "sh ./db.dev.sh",
+    "build": "rimraf dist && tsc",
+    "test": "jest",
+    "dev": "nodemon --config nodemon.json src/bootstrap.ts"
+  },
+  "build": "rimraf ./build && tsc",
+  "keywords": [
+    "node.js",
+    "typescript"
+  ],
+  "author": "Yuri Kornienko",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.23",
+    "@types/pg": "^8.6.5",
+    "nodemon": "^2.0.15",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "await-to-js": "^3.0.0",
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jest": "^27.5.1",
+    "joi": "^17.6.0",
+    "pg": "^8.7.3"
+  }
+}
