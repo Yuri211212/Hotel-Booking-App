@@ -8,3 +8,7 @@
 
 # Configuration file
 .env
+
+# Elastic Beanstalk Files
+.ebextensions
+.elasticbeanstalk
