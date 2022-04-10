@@ -4,13 +4,13 @@
   "description": "API server for hotels booking app",
   "main": "app.js",
   "scripts": {
-    "start": "npm run build && node build/bootstrap.js",
+    "start": "node index.js",
+    "deploy": "npm install && npm run build && npm run start",
     "db:dev": "sh ./db.dev.sh",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf build && tsc",
     "test": "jest",
     "dev": "nodemon --config nodemon.json src/bootstrap.ts"
   },
-  "build": "rimraf ./build && tsc",
   "keywords": [
     "node.js",
     "typescript"
