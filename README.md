@@ -25,21 +25,20 @@ By default each hotel has 10 rooms per night and HERE APi returns max 10 nearest
 * Docker-compose
 
 ### Quick Start
-Guide about registration and receiving HERE API key:
-[https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/quick-start.html]
+[Guide about registration and receiving HERE API key](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/quick-start.html)
 
 I've added node_modules folder to gitignore, don't forget to start with npm i.  
 
 You'll have to create also a configuration .env file, with the following lines 
 (all DB data can be changed at docker-compose.yaml file):
 
-* ####USER_DB = postgres
-* ####HOST = localhost
-* ####DATABASE = postgres
-* ####PASSWORD = postgress
-* ####DB_PORT = 5432
-* ####PORT = 3000
-* ####API_KEY = //your own API key from HERE API//
+* #### USER_DB = postgres
+* #### HOST = localhost
+* #### DATABASE = postgres
+* #### PASSWORD = postgress
+* #### DB_PORT = 5432
+* #### PORT = 3000
+* #### API_KEY = //your own API key from HERE API//
 
 Application will run at http:localhost:3000
 
