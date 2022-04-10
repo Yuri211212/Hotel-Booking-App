@@ -26,7 +26,7 @@ router.post('/booking', bookingCreateMw, async (req: Request, res: Response): Pr
     }
     return res.status(201).json({ message: 'You have created booking'});
     }
-    return res.status(500).json({ message: 'Sorry, there are not available numbers to this dates'})
+    return res.status(403).json({ message: 'Sorry, there are not available numbers to this dates'})
 })
 
 export default router;

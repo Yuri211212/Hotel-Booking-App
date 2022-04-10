@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  title: hotelbookingapp
+  description: PI server for hotels booking app
+  version: '1.0.0'
+
+servers:
+  - url: http://localhost:3000
+    description: dev server
+
+tags:
+  - name: booking
+    description: operations with bookings
+    
+  - name: hotels
+    description: content about hotels
+    
+paths:
+  /booking/{hotel_id}:
+    get:
+      tags:
+        - booking
+      summary: Find all bookings from hotel
+      parameters:
+        - $ref: '#/components/parameters/Hotel_Id'
+      description: Hotel_id comes with query params
+      responses:
+        '201':
+          description: Response information about the bookings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingList'
+        '500':
+          description: Smth went wrong during getting bookings info
+  /booking:
+    post:
+      tags:
+        - booking
+      summary: Save new booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hotel_id:
+                  type: number
+                  example: 1
+                guest_name:
+                  type: string
+                  example: 'john'
+                guest_email:
+                  type: string
+                  example: 'john@gmail.com'
+                guest_phone:
+                  type: string
+                  example: '499399999'
+                check_in:
+                  type: string
+                  format: date
+                  example: '2020-04-10T17:00:00.000Z'
+                check_out:
+                  type: string
+                  format: date
+                  example: '2020-04-11T16:20:00.000Z'
+      responses:
+        '201':
+          description: You have created booking
+        '403':
+          description: Sorry, there are not available numbers to this dates
+        '500':
+          description: Smth went wrong during saving booking
+  /hotels/{coordinates}:
+    get:
+      tags:
+        - hotels
+      summary: Find hotels at location
+      parameters:
+        - $ref: '#/components/parameters/Coordinates'
+      description: By default Here API returns 10 hotels
+      responses:
+        '200':
+          description: Gets list of hotels
+        '500':
+          description: Smth went wrong during connecting to geolocation service
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelsList'
+  /hotels:
+    post:
+      tags:
+        - hotels
+      summary: Save hotels to DB
+      description: Receives an array with hotels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HotelsList'
+      responses:
+        '200':
+          description: Hotels saved
+        '500':
+          description: Smth went wrong during saving hotels
+
+components:
+  schemas:
+    BookingList:
+        type: array
+        items:
+          $ref: "#/components/schemas/Booking"       
+    Booking:
+      type: object
+      properties:
+        hotel_id:
+          type: string
+          example: '1'
+        guest_name:
+          type: string
+          example: 'john'
+        guest_email:
+          type: string
+          example: 'john@gmail.com'
+        guest_phone:
+          type: string
+          example: '499399999'
+        check_in:
+          type: string
+          format: date
+          example: '2020-04-10T17:00:00.000Z'
+        check_out:
+          type: string
+          format: date
+          example: '2020-04-11T16:20:00.000Z'
+        days_amount:
+          type: number
+          example: 1
+    HotelsList:
+        type: array
+        items:
+          $ref: "#/components/schemas/Hotel"
+    Hotel:
+      type: object
+      properties:
+        title:
+          type: string
+          example: 'Park Inn by Radisson Berlin Alexanderplatz'
+        coordinates:
+          type: string
+          example: '52.52255,13.4128'
+
+  parameters:
+    Hotel_Id:
+      name: hotel_id
+      in: path
+      description: ID of hotel to find bookings
+      required: true
+      schema:
+        type: number
+        example: 1
+    Coordinates:
+      name: coordinates
+      in: path
+      description: coordinates, where to find hotels
+      required: true
+      schema:
+        type: number
+        example: 52.5228,13.4124

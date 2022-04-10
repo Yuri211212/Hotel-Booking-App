@@ -10,8 +10,8 @@ describe('Test for /hotels endpoint', (): void => {
     const coordinates = '/52.5228,13.4124';
     const hotelMockData = [
             {
-                "title": "TestHotel1",
-                "coordinates": "48.1516,23.4233"
+                title: "TestHotel1",
+                coordinates: "48.1516,23.4233",
             }
     ];
 
@@ -23,7 +23,7 @@ describe('Test for /hotels endpoint', (): void => {
         await app.stop();
     }); 
 
-    it('Test for method GET, it should return hotels list from Here API if it responds', async (): Promise<void> => {
+    it('Test for method GET, it should return hotels list if it responds', async (): Promise<void> => {
         const result = await axios.get(path+coordinates);
         expect(result.data[0].title).toBe('Park Inn by Radisson Berlin Alexanderplatz');  
     });
@@ -31,7 +31,7 @@ describe('Test for /hotels endpoint', (): void => {
     it('Test for method POST, it should save hotels list to database', async (): Promise<void> => {
         await axios.post(path, hotelMockData);
         const result = await to(db.query('select * from app.hotel where hotel_name = $1', [hotelMockData[0].title]));
-        expect(result[1]?.rows[0].hotel_name).toBe(hotelMockData[0].title)
+        expect(result[1]?.rows[0]?.hotel_name).toBe(hotelMockData[0].title)
         await to (db.query('delete from app.hotel where hotel_name = $1', [hotelMockData[0].title]));
     });
 });
