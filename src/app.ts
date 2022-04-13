@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(hotelRouter);
 app.use(bookingRouter);
+//TODO Error handler middleware
 
 export default {
   async start(port: number): Promise<Server> {

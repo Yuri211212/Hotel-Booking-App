@@ -1,7 +1,7 @@
 import { BookingInfo, ID } from "../types";
 
 import db from "../db/db";
-import dbScript from '../db/dp-scripts';
+import dbBookingModel from '../db/models/booking';
 
 //here are controllers, which send query requests to db
 
@@ -15,7 +15,7 @@ export async function addBooking (data: BookingInfo): Promise<any> {
         data.check_out,
     ];
 
-    const result = await db.query(dbScript.saveBooking, params);
+    const result = await db.query(dbBookingModel.saveBooking, params);
     if (!result || !result.rows || !result.rows.length) {
         return null;
     }
@@ -28,8 +28,7 @@ export async function checkAvailability (data: BookingInfo): Promise<any> {
         data.check_in,
         data.check_out
     ];
-    const result = await db.query(dbScript.checkAvailability, params);
-    console.log(result.rows.length)
+    const result = await db.query(dbBookingModel.checkAvailability, params);
     if(result.rows.length >= 2){
         return false;
     }
@@ -37,7 +36,7 @@ export async function checkAvailability (data: BookingInfo): Promise<any> {
 };
 
 export async function findAllBookings (hotel_id: ID): Promise<any> {
-    const result = await db.query(dbScript.findAllBookings, [hotel_id]);
+    const result = await db.query(dbBookingModel.findAllBookings, [hotel_id]);
     if (!result || !result.rows) return null;
     return result.rows;
 };

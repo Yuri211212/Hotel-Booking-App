@@ -1,7 +1,7 @@
 import { HotelsList } from "../types";
 
 import db from "../db/db";
-import dbScript from '../db/dp-scripts';
+import dbHotelModel from '../db/models/hotel';
 
 //here are controllers, which send query requests to db
 
@@ -12,7 +12,7 @@ export async function saveHotels (data: HotelsList): Promise<boolean> {
             i.title,
             i.coordinates,
         ];
-        db.query(dbScript.saveHotelList, params)
+        db.query(dbHotelModel.saveHotelList, params)
     })
     return Promise.resolve(true);
 }
