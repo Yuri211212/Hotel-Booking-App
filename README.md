@@ -47,7 +47,6 @@ Application will run at http://localhost:3000
   ### Scripts
 * ###### npm run dev - start application in dev mode
 * ###### npm run start - build and start builded application
-* ###### npm run build - build application(remove dist folder and compile ts to js)
+* ###### npm run build - build application(remove build folder and compile ts to js)
 * ###### npm run test - run tests using jest
-* ###### npm run test:coverage - run tests with coverage information using jest
 * ###### npm run db:dev will raise local PostgreSQL DB at your machine using docker-compose file
